@@ -5,20 +5,28 @@ require ('locus');
 
 
 describe('complete me', ()=> {
-  const text = "/usr/share/dict/words";
+  // const text = "/usr/share/dict/words";
   // let dictionary = fs.readFileSystem(text).toString('utf-8').trim().split('\n');
 
 
-  it.skip('this test is for poking around', ()=> {
+  it.only('this test is for poking around', ()=> {
     let completeMe = new CompleteMe();
-    // completeMe.insert('be');
-    // completeMe.insert('bed');
-    // completeMe.insert('bead');
-    // completeMe.insert('bad');
+    completeMe.insert('be');
+    completeMe.insert('bed');
+    completeMe.insert('bead');
+    completeMe.insert('bad');
     // completeMe.insert('ad');
     // console.log(completeMe.insert('bad'));
-    console.log(completeMe.insert('car'));
-    eval(locus);
+    // console.log(completeMe.suggest('be'));
+    completeMe.suggest('be');
+    completeMe.insert('app');
+    completeMe.insert('apple');
+    completeMe.insert('apply');
+    completeMe.suggest('ap');
+    console.log(completeMe.suggestionList);
+    
+    
+    // eval(locus);
   });
   
   it('should be an instance of CompleteMe', ()=> {
