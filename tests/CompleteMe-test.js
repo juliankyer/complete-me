@@ -9,7 +9,7 @@ describe('complete me', ()=> {
   // let dictionary = fs.readFileSystem(text).toString('utf-8').trim().split('\n');
 
 
-  it.only('this test is for poking around', ()=> {
+  it.skip('this test is for poking around', ()=> {
     let completeMe = new CompleteMe();
     completeMe.insert('be');
     completeMe.insert('bed');
@@ -18,12 +18,12 @@ describe('complete me', ()=> {
     // completeMe.insert('ad');
     // console.log(completeMe.insert('bad'));
     // console.log(completeMe.suggest('be'));
-    completeMe.suggest('be');
-    completeMe.insert('app');
-    completeMe.insert('apple');
-    completeMe.insert('apply');
-    completeMe.suggest('ap');
-    console.log(completeMe.suggestionList);
+    console.log(completeMe.suggest('be'));
+    // completeMe.insert('app');
+    // completeMe.insert('apple');
+    // completeMe.insert('apply');
+    // completeMe.suggest('ap');
+    // console.log(completeMe.suggestionList);
     
     
     // eval(locus);
@@ -65,7 +65,7 @@ describe('complete me', ()=> {
     let completeMe = new CompleteMe();
     completeMe.insert('car');
     completeMe.insert('cry');
-    expect(completeMe.count).to.equal(2);
+    expect(completeMe.counter).to.equal(2);
     
     completeMe.insert('bar');
     expect(completeMe.counter).to.equal(3);
@@ -84,12 +84,12 @@ describe('complete me', ()=> {
     expect(completeMe.root.children['c'].children['a'].children['r'].value).to.equal('car');
   });
   
-  it.skip('should have a suggest function that lists all words that are children of a string', ()=> {
+  it('should have a suggest function that lists all words that are children of a string', ()=> {
     let completeMe = new CompleteMe();
     completeMe.insert('ape');
     completeMe.insert('apple');
     completeMe.insert('apply');
-    expect(completeMe.suggest('ap')).to.equal(['ape', 'apple', 'apply']);
+    expect(completeMe.suggest('ap')).to.deep.equal(['ape', 'apple', 'apply']);
   });
   
   it.skip('should have a populate function that allows you to import an array of words like the dictionary', ()=> {
