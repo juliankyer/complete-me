@@ -1,13 +1,9 @@
 class Node {
-  constructor(letter, children = []) {
-    //letter
+  constructor(letter, children = {}) {
     this.letter = letter;
-    //children {} []
     this.children = children;
-    //boolean- is it a word?
     this.isWord = false;
-    
-    
+    this.value = '';
   }
 }
 
