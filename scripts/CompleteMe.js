@@ -25,11 +25,41 @@ class CompleteMe {
         this.counter++;
         currentNode.isWord = true;
         currentNode.value = word;
-        // return JSON.stringify(this, null, 4);
         return;
       }
     }
   }
+  
+  // insert(word) {
+  //   let splitWord = word.split('');
+  //   this.addWord(splitWord, this.root);
+  //   this.isWord = true;
+  //   this.counter++;
+  //   // currentNode.value = word;
+  // }
+  // 
+  // addWord(wordArray, currentNode) {
+  //   // currentValue += currentLetter;
+  //   if (wordArray === []) {
+  //     // this.isWord = true;
+  //     // this.counter++
+  //     return;
+  //     
+  //   } 
+  //   if (wordArray.length === 0) {
+  //     return;
+  //   }
+  // 
+  // let currentLetter = wordArray.shift();
+  //   
+  //  if (!currentNode.children[currentLetter]) {
+  //     currentNode.children[currentLetter] = new Node(currentLetter);
+  //     this.addWord(wordArray, currentNode.children[currentLetter]);
+  //     
+  //   } else {
+  //      this.addWord(wordArray, currentNode.children[currentLetter])
+  //   }
+  // }
 
   count() {
     return this.counter;
@@ -39,12 +69,13 @@ class CompleteMe {
     this.suggestionList = [];
     let searchString = string.split('');
     let currentNode = this.root;
-    searchString.forEach(letter=> {
-        if (currentNode.children[letter]) {
+    searchString.forEach((letter)=> {
+      if (currentNode.children[letter]) {
         return currentNode = currentNode.children[letter];
       }
     });
     this.suggestedWords(currentNode, string);
+    //*********************this.orderSuggestions
     return this.suggestionList;
   }
   
@@ -59,10 +90,41 @@ class CompleteMe {
     });
   }
   
-  populate() {
+  populate(array) {
+    array.forEach((word)=> {
+      this.insert(word);
+    });
+  }
+  
+  select(substring, word) {
+    let substringArray = substring.split('');
+    let currentNode = this.root;
+    substringArray.forEach((letter)=> {
+      if (currentNode.children[letter]) {
+        return currentNode = currentNode.children[letter];
+      }
+    });
+    this.weightWord(currentNode, word);
+  }
+  
+  weigthWord(currentNode, string) {
+    if (currentNode.isWord) {
+      currentNode.prefCount++;
+    }
+    let childLetters = Object.keys(currentNode.children);
+    childLetters.forEach((letter)=> {
+      let nextNode = currentNode.children[letter];
+      this.suggestedWords(nextNode, (string + letter));
+    });
+  }
+  
+  orderSuggestions(array) {
     
   }
 }
   
 
 export default CompleteMe;
+
+// return JSON.stringify(this, null, 4);
+

@@ -6,46 +6,36 @@ class CompleteMe {
   
   insert(word) {
     let splitWord = word.split('');
-    addWord(splitWord, this.root, '');
-    // addWord('boom');
-    // console.log(this.head);
+    this.addWord(splitWord, this.root);
+    this.isWord = true;
+    this.counter++;
+    // currentNode.value = word;
   }
   
-  addWord(wordArray, currentNode, currentValue) {
-    console.log(wordArray);
-    console.log(currentNode);
-    console.log(currentValue);
-    // wordArray, currentNode, currentValue
-    // let currentLetter = wordArray.shift();
+  addWord(wordArray, currentNode) {
     // currentValue += currentLetter;
-    // if (wordArray === []) {
-    //   this.isWord = true;
-    //   this.count++
-    //   return;
-    // } else if (!currentNode.children.hasOwnProperty(currentLetter)) {
-    //   Object.defineProperty(currentNode.children, currentLetter, {
-    //     value: new Node(),
-    //   });
-    //   addWord(wordArray, currentNode.children[currentLetter], currentValue)
-    // } else {
-    //   addWord(wordArray, currentNode.children[currentLetter], currentValue)
-    // }
+    if (wordArray === []) {
+      // this.isWord = true;
+      // this.counter++
+      return;
+      
+    } 
+    if (wordArray.length === 0) {
+      return;
+    }
+  
+  let currentLetter = wordArray.shift();
+    
+   if (!currentNode.children[currentLetter]) {
+      currentNode.children[currentLetter] = new Node(currentLetter);
+      this.addWord(wordArray, currentNode.children[currentLetter]);
+      
+    } else {
+       this.addWord(wordArray, currentNode.children[currentLetter])
+    }
   }
-  
-  
-  
-  count() {
-    // return this.count;
-    console.log('boom');
-  }
-}
 
-class CompleteMe {
-  constructor(wordArray) {
-    this.head = new Node();
-    this.count = 0;
-    // this.populate(wordArray);
-  }
+
 
   insert(word) {
     let splitWord = word.split('');
@@ -71,37 +61,6 @@ class CompleteMe {
     
   }
   
-  addWord(wordArray, currentNode, currentValue) {
-    let currentLetter = wordArray.shift();
-    currentValue += currentLetter;
-    if (wordArray === []) {
-      // change this.isWord to true
-      this.isWord = true;
-      // add value to currentValue
-      this.count++
-      return;
-    } else if (!currentNode.children.hasOwnProperty(currentLetter)) {
-      // currentLetter does not exist in currentNode.children)                                                     
-      // currentNode.children[currentLetter] = new Node()
-      Object.defineProperty(currentNode.children, currentLetter, {
-        value: new Node(),
-      });
-      addWord(wordArray, currentNode.children[currentLetter], currentValue)
-    } else {
-      addWord(wordArray, currentNode.children[currentLetter], currentValue)
-    }
-  }
+
   
   
-  suggest() {
-    //needs to be able to display all possible words given a certain 
-    //prefix
-  }
-  
-  populate() {
-    //should allow me to import the dictionary/set of words
-  }
-  count() {
-    return this.count;
-  }
-}

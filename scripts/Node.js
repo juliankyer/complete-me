@@ -4,6 +4,7 @@ class Node {
     this.children = children;
     this.isWord = false;
     this.value = '';
+    this.prefCount = 0;
   }
 }
 

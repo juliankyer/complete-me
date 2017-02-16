@@ -2,30 +2,20 @@ import { expect } from 'chai';
 import CompleteMe from '../scripts/CompleteMe';
 import Node from '../scripts/Node';
 require ('locus');
+import fs from 'fs';
 
 
 describe('complete me', ()=> {
-  // const text = "/usr/share/dict/words";
-  // let dictionary = fs.readFileSystem(text).toString('utf-8').trim().split('\n');
+  const text = "/usr/share/dict/words";
+  const dictionary = fs.readFileSync(text).toString('utf-8').trim().split('\n')
 
 
   it.skip('this test is for poking around', ()=> {
     let completeMe = new CompleteMe();
-    completeMe.insert('be');
-    completeMe.insert('bed');
-    completeMe.insert('bead');
-    completeMe.insert('bad');
-    // completeMe.insert('ad');
-    // console.log(completeMe.insert('bad'));
-    // console.log(completeMe.suggest('be'));
-    console.log(completeMe.suggest('be'));
-    // completeMe.insert('app');
-    // completeMe.insert('apple');
-    // completeMe.insert('apply');
-    // completeMe.suggest('ap');
-    // console.log(completeMe.suggestionList);
-    
-    
+    let array = ['pen', 'people', 'prairie'];
+    completeMe.populate(array);
+    completeMe.suggest('p');
+    console.log(completeMe);
     // eval(locus);
   });
   
@@ -92,10 +82,26 @@ describe('complete me', ()=> {
     expect(completeMe.suggest('ap')).to.deep.equal(['ape', 'apple', 'apply']);
   });
   
-  it.skip('should have a populate function that allows you to import an array of words like the dictionary', ()=> {
+  it('should have a populate function that allows you to pass in an array that then gets added to the trie', ()=> {
+    let completeMe = new CompleteMe();
+    let array = ['pen', 'people', 'prairie'];
+    completeMe.populate(array);
+    expect(completeMe.suggest('p')).to.deep.equal(array);
+  });
+  
+  it('should have a populate function that allows you to import an array of words like the dictionary', ()=> {
     let completeMe = new CompleteMe();
     completeMe.populate(dictionary);
-    expect(completeMe.counter).to.equal(235866);
-    expect(completeMe.suggest('piz')).to.equal(['pize', 'pizza', 'pizzeria', 'pizzicato', 'pizzle']);
-  })
+    expect(completeMe.counter).to.equal(235886);
+    expect(completeMe.suggest('piz')).to.deep.equal(['pize', 'pizza', 'pizzeria', 'pizzicato', 'pizzle']);
+  });
+  
+  it.only('should have a select function that allows user to prefer a suggestion returned from a substring', ()=> {
+    let completeMe = new CompleteMe();
+    completeMe.populate(['pize', 'pizza', 'pizzeria', 'pizzicato', 'pizzle']);
+    expect(completeMe.suggest('piz')).to.deep.equal(['pize', 'pizza', 'pizzeria', 'pizzicato', 'pizzle']);
+    
+    completeMe.select('piz', 'pizzeria');
+    expect(completeMe.suggest('piz')).to.deep.equal(['pizzeria', 'pize', 'pizza', 'pizzicato', 'pizzle']);
+  });
 });

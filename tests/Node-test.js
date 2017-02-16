@@ -20,5 +20,5 @@ describe('node', () => {
   it('should have an empty string to hold word values', ()=> {
     let node = new Node();
     expect(node.value).to.deep.equal('');
-  })
+  });
 });
