@@ -14,7 +14,7 @@ describe('complete me', ()=> {
     let completeMe = new CompleteMe();
     let array = ['pen', 'people', 'prairie'];
     completeMe.populate(array);
-    completeMe.select('pen');
+    console.log(completeMe.suggest('pen'));
   });
   
   it('should be an instance of CompleteMe', ()=> {

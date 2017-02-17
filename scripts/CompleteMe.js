@@ -43,14 +43,20 @@ class CompleteMe {
       }
     });
     this.suggestedWords(currentNode, string, suggestionList);
-    return suggestionList;
+    
+    suggestionList.sort((a, b)=> {
+      return b.rating - a.rating;
+    });
+    
+    let suggestedWords = suggestionList.map((object)=> {
+      return object.word;
+    });
+    return suggestedWords;
   }
   
   suggestedWords(currentNode, string, suggestionList) {
-    if (currentNode.isWord && currentNode.prefCount !== 0) {
-      suggestionList.unshift(string);
-    } else if (currentNode.isWord) {
-      suggestionList.push(string);
+    if (currentNode.isWord) {
+      suggestionList.push({word: string, rating: currentNode.prefCount});
     }
   
     let childLetters = Object.keys(currentNode.children);
