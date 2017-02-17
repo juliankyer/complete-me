@@ -8,14 +8,6 @@ import fs from 'fs';
 describe('complete me', ()=> {
   const text = '/usr/share/dict/words';
   const dictionary = fs.readFileSync(text).toString('utf-8').trim().split('\n');
-
-
-  // it.skip('this test is for poking around', ()=> {
-  //   let completeMe = new CompleteMe();
-  //   let array = ['pen', 'people', 'prairie'];
-  //   completeMe.populate(array);
-  //   console.log(completeMe.suggest('pen'));
-  // });
   
   it('should be an instance of CompleteMe', ()=> {
     let completeMe = new CompleteMe();
@@ -90,7 +82,7 @@ describe('complete me', ()=> {
   it('should have a populate function that allows you to import an array of words like the dictionary', ()=> {
     let completeMe = new CompleteMe();
     completeMe.populate(dictionary);
-    expect(completeMe.counter).to.equal(235886);
+    expect(completeMe.count()).to.equal(235886);
     expect(completeMe.suggest('piz')).to.deep.equal(['pize', 'pizza', 'pizzeria', 'pizzicato', 'pizzle']);
   });
   
