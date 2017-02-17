@@ -1,39 +1,30 @@
-class CompleteMe {
-  constructor() {
-    this.root = new Node();
-    this.count = 0;
+insert(word) {
+  let splitWord = word.split('');
+  this.addWord(splitWord, this.root);
+  this.isWord = true;
+  this.counter++;
+  // currentNode.value = word;
+}
+
+addWord(wordArray, currentNode) {
+  // currentValue += currentLetter;
+  if (wordArray === []) {
+    // this.isWord = true;
+    // this.counter++
+    return;
+  } 
+  if (wordArray.length === 0) {
+    return;
   }
-  
-  insert(word) {
-    let splitWord = word.split('');
-    this.addWord(splitWord, this.root);
-    this.isWord = true;
-    this.counter++;
-    // currentNode.value = word;
+
+let currentLetter = wordArray.shift();
+  if (!currentNode.children[currentLetter]) {
+    currentNode.children[currentLetter] = new Node(currentLetter);
+    this.addWord(wordArray, currentNode.children[currentLetter]);
+  } else {
+     this.addWord(wordArray, currentNode.children[currentLetter])
   }
-  
-  addWord(wordArray, currentNode) {
-    // currentValue += currentLetter;
-    if (wordArray === []) {
-      // this.isWord = true;
-      // this.counter++
-      return;
-      
-    } 
-    if (wordArray.length === 0) {
-      return;
-    }
-  
-  let currentLetter = wordArray.shift();
-    
-   if (!currentNode.children[currentLetter]) {
-      currentNode.children[currentLetter] = new Node(currentLetter);
-      this.addWord(wordArray, currentNode.children[currentLetter]);
-      
-    } else {
-       this.addWord(wordArray, currentNode.children[currentLetter])
-    }
-  }
+}
 
 
 
@@ -60,6 +51,8 @@ class CompleteMe {
     // console.log(this.head);
     
   }
+  
+  
   
 
   

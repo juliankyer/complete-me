@@ -6,17 +6,15 @@ import fs from 'fs';
 
 
 describe('complete me', ()=> {
-  const text = "/usr/share/dict/words";
-  const dictionary = fs.readFileSync(text).toString('utf-8').trim().split('\n')
+  const text = '/usr/share/dict/words';
+  const dictionary = fs.readFileSync(text).toString('utf-8').trim().split('\n');
 
 
   it.skip('this test is for poking around', ()=> {
     let completeMe = new CompleteMe();
     let array = ['pen', 'people', 'prairie'];
     completeMe.populate(array);
-    completeMe.suggest('p');
-    console.log(completeMe);
-    // eval(locus);
+    completeMe.select('pen');
   });
   
   it('should be an instance of CompleteMe', ()=> {
@@ -96,12 +94,12 @@ describe('complete me', ()=> {
     expect(completeMe.suggest('piz')).to.deep.equal(['pize', 'pizza', 'pizzeria', 'pizzicato', 'pizzle']);
   });
   
-  it.only('should have a select function that allows user to prefer a suggestion returned from a substring', ()=> {
+  it('should have a select function that allows user to prefer a suggestion returned from a substring', ()=> {
     let completeMe = new CompleteMe();
     completeMe.populate(['pize', 'pizza', 'pizzeria', 'pizzicato', 'pizzle']);
     expect(completeMe.suggest('piz')).to.deep.equal(['pize', 'pizza', 'pizzeria', 'pizzicato', 'pizzle']);
     
-    completeMe.select('piz', 'pizzeria');
+    completeMe.select('pizzeria');
     expect(completeMe.suggest('piz')).to.deep.equal(['pizzeria', 'pize', 'pizza', 'pizzicato', 'pizzle']);
   });
 });
