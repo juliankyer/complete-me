@@ -10,12 +10,12 @@ describe('complete me', ()=> {
   const dictionary = fs.readFileSync(text).toString('utf-8').trim().split('\n');
 
 
-  it.skip('this test is for poking around', ()=> {
-    let completeMe = new CompleteMe();
-    let array = ['pen', 'people', 'prairie'];
-    completeMe.populate(array);
-    console.log(completeMe.suggest('pen'));
-  });
+  // it.skip('this test is for poking around', ()=> {
+  //   let completeMe = new CompleteMe();
+  //   let array = ['pen', 'people', 'prairie'];
+  //   completeMe.populate(array);
+  //   console.log(completeMe.suggest('pen'));
+  // });
   
   it('should be an instance of CompleteMe', ()=> {
     let completeMe = new CompleteMe();
@@ -101,5 +101,14 @@ describe('complete me', ()=> {
     
     completeMe.select('pizzeria');
     expect(completeMe.suggest('piz')).to.deep.equal(['pizzeria', 'pize', 'pizza', 'pizzicato', 'pizzle']);
+  });
+  
+  it('should order preferred words by vote', ()=> {
+    let completeMe = new CompleteMe();
+    completeMe.populate(['pize', 'pizza', 'pizzeria', 'pizzicato', 'pizzle']);
+    completeMe.select('pizza');
+    completeMe.select('pizza');
+    completeMe.select('pizzeria');
+    expect(completeMe.suggest('piz')).to.deep.equal(['pizza', 'pizzeria', 'pize', 'pizzicato', 'pizzle']);
   });
 });

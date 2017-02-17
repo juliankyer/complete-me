@@ -91,8 +91,4 @@ class CompleteMe {
   }
 }
   
-
 export default CompleteMe;
-
-// return JSON.stringify(this, null, 4);
-

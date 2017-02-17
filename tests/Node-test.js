@@ -21,4 +21,9 @@ describe('node', () => {
     let node = new Node();
     expect(node.value).to.deep.equal('');
   });
+  
+  it('should have a counter to keep track of its preferred word votes', ()=> {
+    let node = new Node();
+    expect(node.prefCount).to.equal(0);
+  });
 });
